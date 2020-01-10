@@ -25,8 +25,8 @@ public class BaseController {
         return ResponseResultDTO.ok();
     }
 
-    protected ResponseResultDTO ok(ResponseResultDTO ResponseResultDTO) {
-        return ResponseResultDTO;
+    protected ResponseResultDTO ok(ResponseResultDTO responseResultDTO) {
+        return responseResultDTO;
     }
 
     protected ResponseResultDTO ok(String msg) {
@@ -57,8 +57,8 @@ public class BaseController {
         return ResponseResultDTO.fail(msg);
     }
 
-    protected ResponseResultDTO fail(ResponseResultDTO ResponseResultDTO) {
-        return ResponseResultDTO;
+    protected ResponseResultDTO fail(ResponseResultDTO responseResultDTO) {
+        return responseResultDTO;
     }
 
     protected ResponseResultDTO fail(String errCode, String msg) {
