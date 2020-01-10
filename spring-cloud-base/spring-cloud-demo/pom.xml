@@ -4,30 +4,34 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.sz.springcloudsamples</groupId>
-		<artifactId>spring-boot-base</artifactId>
+		<artifactId>spring-cloud-base</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<groupId>com.sz.springcloudsamples</groupId>
-	<artifactId>spring-boot-demo</artifactId>
+	<artifactId>spring-cloud-demo</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
-	<name>spring-boot-demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>spring-cloud-demo</name>
+	<description>Demo projects for Spring Cloud</description>
+
+	<modules>
+		
+	</modules>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.sz.springcloudsamples</groupId>
-			<artifactId>spring-boot-common</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<artifactId>spring-cloud-common</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -41,14 +45,6 @@
 				<artifactId>maven-deploy-plugin</artifactId>
 				<configuration>
 					<skip>true</skip>
-				</configuration>
-			</plugin>
-			<!-- 使单元测试不影响项目的编译 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>   <!-- 跳过单元测试 -->
 				</configuration>
 			</plugin>
 		</plugins>
