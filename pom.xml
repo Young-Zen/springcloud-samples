@@ -30,7 +30,7 @@
         <lombok.version>1.18.10</lombok.version>
         <spring-boot-admin.version>2.1.6</spring-boot-admin.version>
         <baomidou.mybatis-plus.version>3.1.2</baomidou.mybatis-plus.version>
-        <org.mapstruct.version>1.3.0.Final</org.mapstruct.version>
+        <org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
         <alibaba.fastjson.version>1.2.62</alibaba.fastjson.version>
         <alibaba.p3c-pmd.version>1.3.6</alibaba.p3c-pmd.version>
     </properties>
@@ -95,6 +95,13 @@
                         <source>${maven.compiler.source}</source>
                         <target>${maven.compiler.target}</target>
                         <encoding>${java.encoding}</encoding>
+                        <!-- See https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html -->
+                        <!-- Classpath elements to supply as annotation processor path. If specified, the compiler   -->
+                        <!-- will detect annotation processors only in those classpath elements. If omitted, the     -->
+                        <!-- default classpath is used to detect annotation processors. The detection itself depends -->
+                        <!-- on the configuration of annotationProcessors.                                           -->
+                        <!--                                                                                         -->
+                        <!-- According to this documentation, the provided dependency processor is not considered!   -->
                         <annotationProcessorPaths>
                             <path>
                                 <groupId>org.projectlombok</groupId>

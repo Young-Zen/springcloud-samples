@@ -1,6 +1,8 @@
 package com.sz.springcloudsamples.demo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sz.springcloudsamples.common.mvc.controller.BaseController;
 import com.sz.springcloudsamples.common.mvc.dto.ResponseResultDTO;
 import com.sz.springcloudsamples.demo.entity.PersonEntity;
@@ -17,6 +19,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -35,13 +38,27 @@ public class PersonController extends BaseController {
         PersonVO personVO = new PersonVO();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         personVO.setName("mybatisPlus").setAge(1).setBirthday(LocalDate.parse("2020-01-01", dateTimeFormatter)).setAccount(new BigDecimal("5.2")).setDeleted(false);
-        personService.save(PersonMapper.INSTANCE.personVO2PersonEntity(personVO));
+        personService.save(PersonMapper.INSTANCE.vo2Entity(personVO));
 
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.eq("name", "mybatisPlus");
         wrapper.last("limit 1");
         wrapper.orderByDesc("pk_person_id");
         PersonEntity personEntity = personService.getOne(wrapper);
-        return super.ok(PersonMapper.INSTANCE.personEntity2PersonVO(personEntity));
+        return super.ok(PersonMapper.INSTANCE.entity2Vo(personEntity));
+    }
+
+    @GetMapping("/mybatisPlus/list")
+    public ResponseResultDTO list() {
+        List<PersonEntity> demoPOList = personService.list();
+        return ResponseResultDTO.ok(PersonMapper.INSTANCE.entityList2VoList(demoPOList));
+    }
+
+    @GetMapping("/mybatisPlus/page")
+    public ResponseResultDTO page() {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.orderByDesc("pk_person_id");
+        IPage<PersonEntity> page = personService.page(new Page<>(0, 10), wrapper);
+        return ResponseResultDTO.ok(PersonMapper.INSTANCE.entityPage2VoPage(page));
     }
 }
