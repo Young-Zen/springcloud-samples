@@ -4,7 +4,7 @@ server:
 spring:
   application:
     name: spring-cloud-demo
-  #  boot:
+#  boot:
 #    admin:
 #      client:
 #        url: http://localhost:8081
@@ -15,6 +15,9 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+  profiles:
+    active:
+      - secure
 
 mybatis-plus:
   configuration:
@@ -31,7 +34,7 @@ eureka:
   client:
     registryFetchIntervalSeconds: 10
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+      defaultZone: http://eureka:eureka@${eureka.instance.hostname}:8761/eureka/
 
 management:
   endpoints:
@@ -48,3 +51,22 @@ custom:
   mybatisPlus:
     performance:
       enable: true
+
+---
+spring:
+  profiles: secure
+  security:
+    user:
+      name: actuator
+      password: actuator
+      roles: ACTUATOR_ADMIN
+  boot:
+    admin:
+      client:
+        username: admin #These two are needed so that the client
+        password: admin #can register at the protected server api
+eureka:
+  instance:
+    metadata-map:
+      user.name: ${spring.security.user.name}     #These two are needed so that the server
+      user.password: ${spring.security.user.name} #can access the protected client endpoints

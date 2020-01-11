@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: spring-boot-admin-server
+  security:
+    user:
+      name: admin
+      password: admin
+      roles: SPRINGBOOT_ADMIN
 
 eureka:
   instance:
@@ -15,10 +20,12 @@ eureka:
     health-check-url-path: /actuator/health
     metadata-map:
       startup: ${random.int}    #needed to trigger info and endpoint update after restart
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.name}
   client:
     registryFetchIntervalSeconds: 5 #表示eureka client间隔多久去拉取服务注册信息，默认为30秒。
     serviceUrl:
-      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
+      defaultZone: ${EUREKA_SERVICE_URL:http://eureka:eureka@localhost:8761}/eureka/
 
 management:
   endpoints:

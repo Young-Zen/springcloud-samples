@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: eureka-server
+  security:
+    user:
+      name: eureka
+      password: eureka
+      roles: EUREKA_ADMIN
 
 eureka:
   instance:
@@ -12,4 +17,4 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
     service-url:
-      defultZone: http://${eureka.instance.hostname}:${server.port}/eureka
+      defultZone: http://eureka:eureka@${eureka.instance.hostname}:${server.port}/eureka

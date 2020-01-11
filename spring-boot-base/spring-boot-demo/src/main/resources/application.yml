@@ -2,12 +2,22 @@ server:
   port: 8082
 
 spring:
+  security:
+    user:
+      name: actuator
+      password: actuator
+      roles: ACTUATOR_ADMIN
   boot:
     admin:
       client:
         url: http://localhost:8081
+        username: admin
+        password: admin
         instance:
           name: spring-boot-demo
+          metadata:
+            user.name: ${spring.security.user.name}
+            user.password: ${spring.security.user.password}
   datasource:
     url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
     username: root
