@@ -16,11 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * @author Yanghj
@@ -38,20 +35,20 @@ public class PersonController extends BaseController {
         PersonVO personVO = new PersonVO();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         personVO.setName("mybatisPlus").setAge(1).setBirthday(LocalDate.parse("2020-01-01", dateTimeFormatter)).setAccount(new BigDecimal("5.2")).setDeleted(false);
-        personService.save(PersonMapper.INSTANCE.vo2Entity(personVO));
+        personService.save(PersonMapper.INSTANCE.toEntity(personVO));
 
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.eq("name", "mybatisPlus");
         wrapper.last("limit 1");
         wrapper.orderByDesc("pk_person_id");
         PersonEntity personEntity = personService.getOne(wrapper);
-        return super.ok(PersonMapper.INSTANCE.entity2Vo(personEntity));
+        return super.ok(PersonMapper.INSTANCE.toVO(personEntity));
     }
 
     @GetMapping("/mybatisPlus/list")
     public ResponseResultDTO list() {
         List<PersonEntity> demoPOList = personService.list();
-        return ResponseResultDTO.ok(PersonMapper.INSTANCE.entityList2VoList(demoPOList));
+        return ResponseResultDTO.ok(PersonMapper.INSTANCE.toVOList(demoPOList));
     }
 
     @GetMapping("/mybatisPlus/page")
@@ -59,6 +56,6 @@ public class PersonController extends BaseController {
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.orderByDesc("pk_person_id");
         IPage<PersonEntity> page = personService.page(new Page<>(0, 10), wrapper);
-        return ResponseResultDTO.ok(PersonMapper.INSTANCE.entityPage2VoPage(page));
+        return ResponseResultDTO.ok(PersonMapper.INSTANCE.toVOPage(page));
     }
 }

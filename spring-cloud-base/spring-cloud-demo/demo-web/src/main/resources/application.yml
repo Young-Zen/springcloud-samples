@@ -1,0 +1,35 @@
+server:
+  port: 8083
+
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:8081
+        instance:
+          name: spring-boot-demo
+  datasource:
+    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: always
+
+custom:
+  mybatisPlus:
+    performance:
+      enable: true

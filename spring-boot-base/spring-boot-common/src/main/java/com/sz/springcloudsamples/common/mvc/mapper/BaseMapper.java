@@ -11,22 +11,22 @@ import java.util.List;
  * @author Yanghj
  * @date 1/11/2020
  */
-public interface BaseMapper<V extends BaseVO, E extends BaseEntity> {
+public interface BaseMapper<T extends BaseVO, S extends BaseEntity> {
 
-    V entity2Vo(E entity);
+    T toVO(S entity);
 
-    E vo2Entity(V v);
+    S toEntity(T vo);
 
-    List<V> entityList2VoList(List<E> entityList);
+    List<T> toVOList(List<S> entityList);
 
-    List<E> voList2EntityList(List<V> voList);
+    List<S> toEntityList(List<T> voList);
 
-    default IPage<V> entityPage2VoPage(IPage<E> entityPage) {
+    default IPage<T> toVOPage(IPage<S> entityPage) {
         if (entityPage == null) {
             return null;
         }
-        IPage<V> voPage = new Page<V>(entityPage.getCurrent(), entityPage.getSize(), entityPage.getTotal());
-        voPage.setRecords(this.entityList2VoList(entityPage.getRecords()));
+        IPage<T> voPage = new Page<T>(entityPage.getCurrent(), entityPage.getSize(), entityPage.getTotal());
+        voPage.setRecords(this.toVOList(entityPage.getRecords()));
         return voPage;
     }
 }

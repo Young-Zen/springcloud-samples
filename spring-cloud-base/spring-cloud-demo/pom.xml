@@ -16,7 +16,11 @@
 	<description>Demo projects for Spring Cloud</description>
 
 	<modules>
-		
+		<module>demo-dao</module>
+		<module>demo-entity</module>
+		<module>demo-service</module>
+		<module>demo-vo</module>
+        <module>demo-web</module>
 	</modules>
 
 	<dependencies>
