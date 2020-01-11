@@ -1,4 +1,4 @@
-package com.sz.springcloudsamples;
+package com.sz.springcloudsamples.demo.web;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

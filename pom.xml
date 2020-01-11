@@ -39,6 +39,7 @@
         <module>spring-boot-base</module>
         <module>spring-cloud-base</module>
         <module>spring-boot-admin-server</module>
+        <module>eureka-server</module>
     </modules>
 
     <dependencyManagement>

@@ -2,12 +2,14 @@ server:
   port: 8083
 
 spring:
-  boot:
-    admin:
-      client:
-        url: http://localhost:8081
-        instance:
-          name: spring-boot-demo
+  application:
+    name: spring-cloud-demo
+  #  boot:
+#    admin:
+#      client:
+#        url: http://localhost:8081
+#        instance:
+#          name: spring-cloud-demo
   datasource:
     url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
     username: root
@@ -17,6 +19,19 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+eureka:
+  instance:
+    hostname: localhost
+#    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/actuator
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
+  client:
+    registryFetchIntervalSeconds: 10
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
 
 management:
   endpoints:
