@@ -1,4 +1,4 @@
-package com.sz.springcloudsamples.demo.controller;
+package com.sz.springcloudsamples.demo.web;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -8,8 +8,8 @@ import com.sz.springcloudsamples.common.exception.BaseException;
 import com.sz.springcloudsamples.common.mvc.controller.BaseController;
 import com.sz.springcloudsamples.common.mvc.dto.ResponseResultDTO;
 import com.sz.springcloudsamples.demo.entity.PersonEntity;
-import com.sz.springcloudsamples.demo.mapper.PersonMapper;
 import com.sz.springcloudsamples.demo.service.PersonService;
+import com.sz.springcloudsamples.demo.service.mapper.PersonMapper;
 import com.sz.springcloudsamples.demo.vo.PersonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,7 +27,7 @@ import java.util.List;
 
 /**
  * @author Yanghj
- * @date 1/10/2020
+ * @date 1/13/2020
  */
 @RestController
 @RequestMapping("/person")

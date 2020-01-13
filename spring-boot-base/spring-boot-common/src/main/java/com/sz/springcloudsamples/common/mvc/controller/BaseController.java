@@ -1,6 +1,7 @@
 package com.sz.springcloudsamples.common.mvc.controller;
 
 import com.sz.springcloudsamples.common.mvc.dto.ResponseResultDTO;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Yanghj
  * @date 1/10/2020
  */
+@Validated  //校验方法参数
 public class BaseController {
 
     protected HttpServletRequest request;

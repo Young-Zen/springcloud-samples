@@ -28,7 +28,7 @@ eureka:
     hostname: localhost
 #    prefer-ip-address: true
     instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
-    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/actuator
+    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}
     leaseRenewalIntervalInSeconds: 10
     leaseExpirationDurationInSeconds: 30
   client:
@@ -51,6 +51,14 @@ custom:
   mybatisPlus:
     performance:
       enable: true
+  swagger:
+#    enable: false
+    csrf:
+      enable: true
+  log:
+    additional-skip-pattern: /
+    result: false
+#    enable: false
 
 ---
 spring:
