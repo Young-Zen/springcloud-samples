@@ -15,6 +15,8 @@ import java.time.LocalDate;
 @Accessors(chain = true)
 public class PersonVO extends BaseVO {
 
+    private Long personId;
+
     private String name;
 
     private int age;

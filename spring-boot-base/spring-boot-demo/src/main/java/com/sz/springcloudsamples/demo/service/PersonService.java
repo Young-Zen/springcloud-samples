@@ -8,4 +8,5 @@ import com.sz.springcloudsamples.demo.entity.PersonEntity;
  * @date 1/10/2020
  */
 public interface PersonService extends BaseService<PersonEntity> {
+    void async();
 }

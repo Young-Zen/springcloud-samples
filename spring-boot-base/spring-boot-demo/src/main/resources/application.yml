@@ -43,3 +43,7 @@ custom:
   mybatisPlus:
     performance:
       enable: true
+  log:
+    additional-skip-pattern: /
+    result: false
+#    enable: false
