@@ -19,6 +19,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * 日志拦截器
+ *
  * @author Yanghj
  * @date 1/13/2020
  */

@@ -29,6 +29,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
+ * Swagger2配置类
+ *
  * @author Yanghj
  * @date 1/13/2020
  */

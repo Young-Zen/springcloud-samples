@@ -8,6 +8,8 @@ import javax.validation.groups.Default;
 import java.time.LocalDateTime;
 
 /**
+ * 基本视图对象
+ *
  * @author Yanghj
  * @date 1/10/2020
  */

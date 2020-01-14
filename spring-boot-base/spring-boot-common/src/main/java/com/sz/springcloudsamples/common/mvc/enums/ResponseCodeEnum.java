@@ -1,6 +1,8 @@
 package com.sz.springcloudsamples.common.mvc.enums;
 
 /**
+ * 响应码及对应消息枚举类
+ *
  * @author Yanghj
  * @date 1/10/2020
  */

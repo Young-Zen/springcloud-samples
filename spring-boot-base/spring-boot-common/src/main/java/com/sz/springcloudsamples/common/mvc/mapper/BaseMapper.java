@@ -8,6 +8,8 @@ import com.sz.springcloudsamples.common.mvc.vo.BaseVO;
 import java.util.List;
 
 /**
+ * 基本实体映射处理接口
+ *
  * @author Yanghj
  * @date 1/11/2020
  */

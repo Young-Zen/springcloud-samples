@@ -7,6 +7,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 忽略日志追踪
+ *
  * @author Yanghj
  * @date 1/13/2020
  */

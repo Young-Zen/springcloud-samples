@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 全局异常统一处理类
+ *
  * @author Yanghj
  * @date 1/13/2020
  */

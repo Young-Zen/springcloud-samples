@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 请求工具类
+ *
  * @author Yanghj
  * @date 1/13/2020
  */
@@ -28,17 +30,17 @@ public class RequestUtils {
      * 获取当前请求的 requestAttributes；
      * 线程安全。
      *
-     * @return
+     * @return {@link ServletRequestAttributes}
      */
     public ServletRequestAttributes getServletRequestAttributes() {
         return (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
     }
 
     /**
-     * 获取当前请求的 request；
+     * 获取当前请求对象；
      * 线程安全。
      *
-     * @return
+     * @return 请求对象
      */
     public HttpServletRequest getHttpServletRequest() {
         RequestAttributes requestAttributes = this.getServletRequestAttributes();
@@ -49,10 +51,10 @@ public class RequestUtils {
     }
 
     /**
-     * 获取当前请求的 response；
+     * 获取当前请求的响应对象；
      * 线程安全。
      *
-     * @return
+     * @return 响应对象
      */
     public HttpServletResponse getHttpServletResponse() {
         RequestAttributes requestAttributes = this.getServletRequestAttributes();
@@ -65,7 +67,7 @@ public class RequestUtils {
     /**
      * 获取访问用户的客户端 IP
      *
-     * @return
+     * @return IP地址
      */
     public String getRemoteIp() {
         return this.getRemoteIp(this.getHttpServletRequest());
@@ -74,8 +76,8 @@ public class RequestUtils {
     /**
      * 获取访问用户的客户端 IP
      *
-     * @param request
-     * @return
+     * @param request 请求对象{@link HttpServletRequest}
+     * @return IP地址
      */
     public String getRemoteIp(HttpServletRequest request) {
         if (request == null) {

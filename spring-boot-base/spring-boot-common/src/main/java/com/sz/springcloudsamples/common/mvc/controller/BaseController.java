@@ -7,11 +7,13 @@ import org.springframework.validation.annotation.Validated;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Validated  //校验方法参数
 /**
+ * 基本控制器类
+ *
  * @author Yanghj
  * @date 1/10/2020
  */
-@Validated  //校验方法参数
 public class BaseController {
 
     // 线程安全

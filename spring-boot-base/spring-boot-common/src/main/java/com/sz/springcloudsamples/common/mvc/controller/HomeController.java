@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
+ * 设置主页为/swagger-ui.html
+ *
  * @author Yanghj
  * @date 1/13/2020
  */

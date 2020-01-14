@@ -8,6 +8,12 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+/**
+ * Spring Boot Admin服务器
+ *
+ * @author Yanghj
+ * @date 1/3/2020
+ */
 @Configuration
 @EnableAutoConfiguration
 @EnableAdminServer

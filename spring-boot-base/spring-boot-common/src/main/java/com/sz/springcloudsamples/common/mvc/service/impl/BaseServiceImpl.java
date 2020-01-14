@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sz.springcloudsamples.common.mvc.dao.BaseDAO;
 
 /**
+ * 基本业务服务的实现类
+ *
  * @author Yanghj
  * @date 1/10/2020
  */

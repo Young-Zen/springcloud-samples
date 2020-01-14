@@ -6,6 +6,8 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
+ * 基本数据实体类
+ *
  * @author Yanghj
  * @date 1/10/2020
  */

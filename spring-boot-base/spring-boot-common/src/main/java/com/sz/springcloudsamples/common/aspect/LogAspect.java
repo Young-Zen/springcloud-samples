@@ -16,6 +16,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
+ * 日志切面类
+ *
  * @author Yanghj
  * @date 1/13/2020
  */

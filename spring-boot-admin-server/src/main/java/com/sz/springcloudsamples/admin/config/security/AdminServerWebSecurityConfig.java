@@ -8,6 +8,8 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 /**
+ * Admin Server Security配置类
+ *
  * @author Yanghj
  * @date 1/11/2020
  */
