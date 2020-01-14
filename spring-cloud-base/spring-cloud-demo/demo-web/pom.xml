@@ -18,7 +18,6 @@
 		<dependency>
 			<groupId>com.sz.springcloudsamples.spring-cloud-demo</groupId>
 			<artifactId>demo-service</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

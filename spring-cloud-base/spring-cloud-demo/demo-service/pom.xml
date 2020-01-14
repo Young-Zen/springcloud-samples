@@ -18,12 +18,10 @@
 		<dependency>
 			<groupId>com.sz.springcloudsamples.spring-cloud-demo</groupId>
 			<artifactId>demo-dao</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.sz.springcloudsamples.spring-cloud-demo</groupId>
 			<artifactId>demo-vo</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

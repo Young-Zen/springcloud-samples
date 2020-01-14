@@ -11,6 +11,9 @@
     <description>Base dependency management for Spring Boot and Spring Cloud</description>
 
     <properties>
+        <!-- Project version -->
+        <boot.project.version>1.0.0-SNAPSHOT</boot.project.version>
+        <cloud.project.version>1.0.0-SNAPSHOT</cloud.project.version>
         <!-- Build -->
         <java.version>1.8</java.version>
         <java.encoding>UTF-8</java.encoding>
@@ -68,6 +71,16 @@
                 <version>${spring-boot-admin.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.sz.springcloudsamples</groupId>
+                <artifactId>spring-boot-common</artifactId>
+                <version>${boot.project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sz.springcloudsamples</groupId>
+                <artifactId>spring-cloud-common</artifactId>
+                <version>${cloud.project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

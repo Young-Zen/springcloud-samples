@@ -1,8 +1,8 @@
 package com.sz.springcloudsamples.common.mvc.controller;
 
 import com.sz.springcloudsamples.common.mvc.dto.ResponseResultDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,14 +14,24 @@ import javax.servlet.http.HttpServletResponse;
 @Validated  //校验方法参数
 public class BaseController {
 
+    // 线程安全
+    // 在Spring中，Controller的scope是singleton(单例)，但是其中注入的request却是线程安全的，原因在于：
+    // 使用这种方式，当Bean初始化时，Spring并没有注入一个request对象，而是注入了一个代理（proxy）；
+    // 当Bean中需要使用request对象时，通过该代理获取request对象。代理的实现参见AutowireUtils的内部类。
+    @Autowired
     protected HttpServletRequest request;
+    @Autowired
     protected HttpServletResponse response;
 
-    @ModelAttribute
+    // 线程不安全
+    // @ModelAttribute注解用在Controller中修饰方法时，其作用是Controller中的每个@RequestMapping方法执行前，该方法都会执行。
+    // 因此，setReqAndRes()的作用是在每个HandlerMethod执行前为request对象赋值。
+    // 虽然setReqAndRes()中的参数request本身是线程安全的，但由于Controller是单例的，request作为Controller的一个域，无法保证线程安全。
+    /*@ModelAttribute
     public void setReqAndRes(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
         this.response = response;
-    }
+    }*/
 
     protected ResponseResultDTO ok() {
         return ResponseResultDTO.ok();

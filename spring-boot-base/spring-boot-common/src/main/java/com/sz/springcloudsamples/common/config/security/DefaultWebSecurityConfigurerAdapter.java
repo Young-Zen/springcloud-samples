@@ -3,6 +3,7 @@ package com.sz.springcloudsamples.common.config.security;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @date 1/3/2020
  */
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class DefaultWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {

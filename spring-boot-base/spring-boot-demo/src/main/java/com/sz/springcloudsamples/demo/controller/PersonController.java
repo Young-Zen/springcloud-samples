@@ -15,6 +15,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -118,6 +119,16 @@ public class PersonController extends BaseController {
     @ApiOperation("异步方法例子")
     public ResponseResultDTO async() {
         personService.async();
+        this.response.setHeader("async", this.request.getRequestURI());
         return ResponseResultDTO.ok("look console");
+    }
+
+    @GetMapping("/security")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @ApiOperation("Security 方法上 @PreAuthorize 例子")
+    public ResponseResultDTO security() {
+        ResponseResultDTO responseResultDTO = null;
+        responseResultDTO.getCode();
+        return ResponseResultDTO.fail();
     }
 }

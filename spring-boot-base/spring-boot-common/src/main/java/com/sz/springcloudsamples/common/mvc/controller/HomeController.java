@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 @ConditionalOnProperty(name = "custom.swagger.enable", havingValue = "true", matchIfMissing = true)
+@IgnoreTracing
 @Api(tags = "主页")
 public class HomeController {
 
     @GetMapping("/")
-    @IgnoreTracing
     @ApiOperation("设置主页")
     public String home() {
         return "redirect:swagger-ui.html";

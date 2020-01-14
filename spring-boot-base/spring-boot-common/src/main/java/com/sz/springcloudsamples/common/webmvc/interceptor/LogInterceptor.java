@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -53,7 +54,12 @@ public class LogInterceptor implements HandlerInterceptor {
                 .setIsThrowing(false)
                 .setIsIgnoreTracing(false);
         // 设置 isIgnoreTracing
-        IgnoreTracing ignoreTracing = ((HandlerMethod) handler).getMethod().getAnnotation(IgnoreTracing.class);
+        Method method = ((HandlerMethod) handler).getMethod();
+        IgnoreTracing ignoreTracing = method.getAnnotation(IgnoreTracing.class);
+        if (ignoreTracing == null) {
+            //ignoreTracing = ((HandlerMethod) handler).getBeanType().getAnnotation(IgnoreTracing.class);
+            ignoreTracing = method.getDeclaringClass().getAnnotation(IgnoreTracing.class);
+        }
         if (ignoreTracing != null) {
             logDTO.setIsIgnoreTracing(true);
         }

@@ -41,7 +41,7 @@ public class LogAspect {
         LogDTO logDTO = LogHolder.getLogDto();
         logDTO.setLogStep(logDTO.getLogStep() + 1)
                 .setAdviceCount(logDTO.getAdviceCount() + 1);
-        LogHolder.setLogDto(logDTO);
+//        LogHolder.setLogDto(logDTO);
         if (logDTO.getIsIgnoreTracing() || !logProperties.getParam()) {
             return;
         }
@@ -60,7 +60,7 @@ public class LogAspect {
     public void methodAferReturning(JoinPoint joinPoint, Object result) {
         LogDTO logDTO = LogHolder.getLogDto();
         logDTO.setAdviceCount(logDTO.getAdviceCount() + 1);
-        LogHolder.setLogDto(logDTO);
+//        LogHolder.setLogDto(logDTO);
         if (logDTO.getIsIgnoreTracing() || !logProperties.getResult()) {
             return;
         }
@@ -72,7 +72,6 @@ public class LogAspect {
         LogDTO logDTO = LogHolder.getLogDto();
         logDTO.setAdviceCount(logDTO.getAdviceCount() + 1)
                 .setIsThrowing(true);
-        LogHolder.setLogDto(logDTO);
-        log.error("应用程序抛出异常", cause);
+//        LogHolder.setLogDto(logDTO);
     }
 }

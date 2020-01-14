@@ -15,6 +15,10 @@
 	<name>spring-cloud-demo</name>
 	<description>Demo projects for Spring Cloud</description>
 
+	<properties>
+		<demo.project.version>1.0.0-SNAPSHOT</demo.project.version>
+	</properties>
+
 	<modules>
 		<module>demo-dao</module>
 		<module>demo-entity</module>
@@ -27,16 +31,36 @@
 		<dependency>
 			<groupId>com.sz.springcloudsamples</groupId>
 			<artifactId>spring-cloud-common</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.sz.springcloudsamples.spring-cloud-demo</groupId>
+				<artifactId>demo-entity</artifactId>
+				<version>${demo.project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sz.springcloudsamples.spring-cloud-demo</groupId>
+				<artifactId>demo-dao</artifactId>
+				<version>${demo.project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sz.springcloudsamples.spring-cloud-demo</groupId>
+				<artifactId>demo-vo</artifactId>
+				<version>${demo.project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sz.springcloudsamples.spring-cloud-demo</groupId>
+				<artifactId>demo-service</artifactId>
+				<version>${demo.project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
