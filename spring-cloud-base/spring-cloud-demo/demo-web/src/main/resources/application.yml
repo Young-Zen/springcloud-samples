@@ -4,37 +4,39 @@ server:
 spring:
   application:
     name: spring-cloud-demo
-#  boot:
-#    admin:
-#      client:
-#        url: http://localhost:8081
-#        instance:
-#          name: spring-cloud-demo
+  security:
+    user:
+      name: actuator
+      password: actuator
+      roles: ACTUATOR_ADMIN
+  boot:
+    admin:
+      client:
+        username: admin #These two are needed so that the client
+        password: admin #can register at the protected server api
   datasource:
-    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://mysql-service-address:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   profiles:
-    active:
-      - secure
-
-mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    active: test
 
 eureka:
   instance:
-    hostname: localhost
+#    hostname: eureka-service-address
 #    prefer-ip-address: true
     instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
-    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}
+    status-page-url: http://${spring.cloud.client.hostname}:${server.port}
     leaseRenewalIntervalInSeconds: 10
     leaseExpirationDurationInSeconds: 30
+    metadata-map:
+      user.name: ${spring.security.user.name}     #These two are needed so that the server
+      user.password: ${spring.security.user.name} #can access the protected client endpoints
   client:
     registryFetchIntervalSeconds: 10
     serviceUrl:
-      defaultZone: http://eureka:eureka@${eureka.instance.hostname}:8761/eureka/
+      defaultZone: http://eureka:eureka@eureka-service-address:8761/eureka/
 
 management:
   endpoints:
@@ -48,33 +50,28 @@ management:
       show-details: always
 
 custom:
+  log:
+    additional-skip-pattern: /
+    result: false
+
+---
+spring:
+  profiles: test
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+custom:
   mybatisPlus:
     performance:
       enable: true
   swagger:
-#    enable: false
     csrf:
       enable: true
-  log:
-    additional-skip-pattern: /
-    result: false
-#    enable: false
 
 ---
 spring:
-  profiles: secure
-  security:
-    user:
-      name: actuator
-      password: actuator
-      roles: ACTUATOR_ADMIN
-  boot:
-    admin:
-      client:
-        username: admin #These two are needed so that the client
-        password: admin #can register at the protected server api
-eureka:
-  instance:
-    metadata-map:
-      user.name: ${spring.security.user.name}     #These two are needed so that the server
-      user.password: ${spring.security.user.name} #can access the protected client endpoints
+  profiles: prod
+
+custom:
+  swagger:
+    enable: false

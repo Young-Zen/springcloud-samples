@@ -12,7 +12,7 @@ spring:
   boot:
     admin:
       client:
-        url: http://localhost:8081
+        url: http://admin-service-address:8081
         username: admin
         password: admin
         instance:
@@ -21,14 +21,12 @@ spring:
             user.name: ${spring.security.user.name}
             user.password: ${spring.security.user.password}
   datasource:
-    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://mysql-service-address:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-
-mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  profiles:
+    active: test
 
 management:
   endpoints:
@@ -41,15 +39,24 @@ management:
     health:
       show-details: always
 
+---
+spring:
+  profiles: test
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 custom:
   mybatisPlus:
     performance:
       enable: true
   swagger:
-#    enable: false
     csrf:
       enable: true
-  log:
-    additional-skip-pattern: /
-    result: false
-#    enable: false
+
+---
+spring:
+  profiles: prod
+
+custom:
+  swagger:
+    enable: false

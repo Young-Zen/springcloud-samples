@@ -14,7 +14,7 @@ eureka:
   instance:
 #    preferIpAddress: true
     instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
-    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}
+    status-page-url: http://${spring.cloud.client.hostname}:${server.port}
     leaseRenewalIntervalInSeconds: 10 #表示eureka client发送心跳给server端的频率。如果在leaseExpirationDurationInSeconds后，server端没有收到client的心跳，则将摘除该instance。
     leaseExpirationDurationInSeconds: 30  #表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance。默认为90秒。
     health-check-url-path: /actuator/health
@@ -25,7 +25,7 @@ eureka:
   client:
     registryFetchIntervalSeconds: 5 #表示eureka client间隔多久去拉取服务注册信息，默认为30秒。
     serviceUrl:
-      defaultZone: ${EUREKA_SERVICE_URL:http://eureka:eureka@localhost:8761}/eureka/
+      defaultZone: ${EUREKA_SERVICE_URL:http://eureka:eureka@eureka-service-address:8761}/eureka/
 
 management:
   endpoints:
