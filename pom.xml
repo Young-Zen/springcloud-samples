@@ -22,6 +22,7 @@
         <!-- Maven properties -->
         <maven.test.skip>false</maven.test.skip>
         <maven.javadoc.skip>true</maven.javadoc.skip>
+        <maven.repository.url>http://baiduyun.com:28081</maven.repository.url>
         <!-- Compiler settings properties -->
         <maven.compiler.version>3.8.0</maven.compiler.version>
         <maven.pmd.version>3.8</maven.pmd.version>
@@ -193,4 +194,17 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Releases</name>
+            <url>${maven.repository.url}/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Snapshot</name>
+            <url>${maven.repository.url}/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
