@@ -23,11 +23,13 @@
         <maven.test.skip>false</maven.test.skip>
         <maven.javadoc.skip>true</maven.javadoc.skip>
         <maven.repository.url>http://baiduyun.com:28081</maven.repository.url>
+        <docker.repository.url>baiduyun.com</docker.repository.url>
         <!-- Compiler settings properties -->
         <maven.compiler.version>3.8.0</maven.compiler.version>
-        <maven.pmd.version>3.8</maven.pmd.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.pmd.version>3.8</maven.pmd.version>
+        <docker.maven.version>1.2.1</docker.maven.version>
         <!-- Dependency version properties -->
         <spring-boot.version>2.1.11.RELEASE</spring-boot.version>
         <spring-cloud.version>Greenwich.SR4</spring-cloud.version>
@@ -138,10 +140,6 @@
             </plugins>
         </pluginManagement>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
             <!-- 编码规约扫描命令： mvn pmd:pmd -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
