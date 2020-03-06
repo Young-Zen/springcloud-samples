@@ -54,7 +54,7 @@
 						<imageTag>latest</imageTag>
 					</imageTags>
 					<!--<entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>-->
-					<entryPoint>java -jar -Duser.timezone=GMT+08 $JAVA_OPTS /${project.build.finalName}.jar</entryPoint>
+					<entryPoint>java -jar -server -XX:+HeapDumpOnOutOfMemoryError -Duser.timezone=GMT+08 $JAVA_OPTS /${project.build.finalName}.jar</entryPoint>
 					<!-- copy the service's jar file from target into the root directory of the image -->
 					<resources>
 						<resource>
