@@ -32,7 +32,7 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>${docker.maven.version}</version>
 				<configuration>
-					<imageName>${docker.repository.url}/${project.artifactId}</imageName>
+					<imageName>${docker.repository.url}/${project.parent.artifactId}</imageName>
 					<baseImage>openjdk:8</baseImage>
 					<imageTags>
 						<imageTag>${project.version}</imageTag>
