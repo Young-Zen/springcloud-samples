@@ -58,6 +58,20 @@
             </plugin>
             <plugin>
                 <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>${dockerfile-maven-version}</version>
+                <configuration>
+                    <repository>${docker.repository.url}/${project.artifactId}</repository>
+                    <tag>${project.version}</tag>
+                    <contextDirectory>${project.basedir}</contextDirectory>
+                    <dockerfile>docker/Dockerfile</dockerfile>
+                    <buildArgs>
+                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+                    </buildArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>${docker.maven.version}</version>
                 <configuration>
