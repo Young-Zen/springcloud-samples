@@ -36,7 +36,7 @@ public class PersonVO extends BaseVO {
 
     @ApiModelProperty("年龄")
     @Min(groups = {Add.class, Update.class}, value = 1, message = "最小年龄为1")
-    private int age;
+    private Integer age;
 
     @ApiModelProperty(value = "生日", example = "2020-05-20")
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -47,5 +47,5 @@ public class PersonVO extends BaseVO {
     private BigDecimal account;
 
     @ApiModelProperty("是否删除标识")
-    private boolean deleted;
+    private Boolean deleted;
 }

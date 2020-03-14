@@ -26,7 +26,7 @@ public class PersonEntity extends BaseEntity {
     private String name;
 
     @TableField("age")
-    private int age;
+    private Integer age;
 
     @TableField("birthday")
     private LocalDate birthday;
@@ -35,5 +35,5 @@ public class PersonEntity extends BaseEntity {
     private BigDecimal account;
 
     @TableField("is_deleted")
-    private boolean deleted;
+    private Boolean deleted;
 }
