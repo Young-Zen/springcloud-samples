@@ -60,13 +60,13 @@
 					<resources>
 						<resource>
 							<targetPath>/</targetPath>
-							<directory>${project.build.directory}</directory>
-							<include>${project.build.finalName}.jar</include>
+							<directory>docker</directory>
+							<include>start.sh</include>
 						</resource>
 						<resource>
 							<targetPath>/</targetPath>
-							<directory>docker</directory>
-							<include>start.sh</include>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
 						</resource>
 					</resources>
 					<serverId>docker-hosted</serverId>
