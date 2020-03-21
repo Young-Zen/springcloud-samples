@@ -1,0 +1,8 @@
+FROM openjdk:8-jdk-alpine
+
+COPY start.sh /
+COPY BOOT-INF/lib /app/lib
+COPY META-INF /app/META-INF
+COPY BOOT-INF/classes /app
+
+ENTRYPOINT ["sh", "start.sh", "com.sz.springcloudsamples.demo.SpringBootDemoApplication"]

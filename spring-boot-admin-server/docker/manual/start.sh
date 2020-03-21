@@ -1,1 +1,1 @@
-exec java -cp app:app/lib/* -server -XX:+HeapDumpOnOutOfMemoryError -Duser.timezone=GMT+08 $JAVA_OPTS $*
+exec java -cp app:app/lib/* -server -XX:+HeapDumpOnOutOfMemoryError $JAVA_OPTS $*
