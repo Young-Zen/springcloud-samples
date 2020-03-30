@@ -1,7 +1,12 @@
 FROM openjdk:8-jdk-alpine
 
+RUN addgroup -g 1000 app \
+    && adduser -H -u 1000 -G app -s /bin/sh -D app
+
+USER app
+
+COPY --chown=app:app docker/start.sh /
 ARG JAR_FILE
-COPY docker/start.sh /
-COPY target/${JAR_FILE} /eureka-server.jar
+COPY --chown=app:app target/${JAR_FILE} /eureka-server.jar
 
 ENTRYPOINT ["sh", "start.sh", "eureka-server.jar"]
