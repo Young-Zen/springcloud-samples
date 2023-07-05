@@ -28,6 +28,7 @@
         <maven.compiler.version>3.8.1</maven.compiler.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.source.version>3.2.1</maven.source.version>
         <maven.pmd.version>3.8</maven.pmd.version>
         <docker.maven.version>1.2.1</docker.maven.version>
         <dockerfile-maven-version>1.4.13</dockerfile-maven-version>
@@ -140,6 +141,20 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <!-- 打包源码 mvn install -DskipTests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven.source.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- 编码规约扫描命令： mvn pmd:pmd -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
