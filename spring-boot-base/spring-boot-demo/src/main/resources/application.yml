@@ -1,4 +1,6 @@
 server:
+  servlet:
+    context-path: /api/boot-demo
   port: 8082
 
 spring:
