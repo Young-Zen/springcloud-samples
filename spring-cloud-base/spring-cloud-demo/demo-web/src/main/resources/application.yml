@@ -29,13 +29,15 @@ eureka:
 #    hostname: eureka-service-address
 #    prefer-ip-address: true
     instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
-    status-page-url: http://${spring.cloud.client.hostname}:${server.port}/${server.servlet.context-path}
     leaseRenewalIntervalInSeconds: 10
     leaseExpirationDurationInSeconds: 30
     metadata-map:
       user.name: ${spring.security.user.name}     #These two are needed so that the server
       user.password: ${spring.security.user.name} #can access the protected client endpoints
-      management.context-path: ${server.servlet.context-path}
+      management.context-path: ${server.servlet.context-path}/actuator
+    status-page-url-path: ${server.servlet.context-path}/actuator/info
+    health-check-url-path: ${server.servlet.context-path}/actuator/health
+    home-page-url-path: ${server.servlet.context-path}
   client:
     registryFetchIntervalSeconds: 10
     serviceUrl:
@@ -50,6 +52,8 @@ management:
     shutdown:
       enabled: true
     health:
+      probes:
+        enabled: true
       show-details: always
 
 custom:
