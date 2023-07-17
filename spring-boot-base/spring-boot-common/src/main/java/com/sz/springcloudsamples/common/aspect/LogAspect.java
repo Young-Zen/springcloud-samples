@@ -59,7 +59,7 @@ public class LogAspect {
     @AfterReturning(value = "com.sz.springcloudsamples.common.aspect.Pointcuts.controllerAspect()" +
             "||com.sz.springcloudsamples.common.aspect.Pointcuts.serviceAspect()" +
             "||com.sz.springcloudsamples.common.aspect.Pointcuts.daoAspect()", returning = "result")
-    public void methodAferReturning(JoinPoint joinPoint, Object result) {
+    public void methodAfterReturning(JoinPoint joinPoint, Object result) {
         LogDTO logDTO = LogHolder.getLogDto();
         logDTO.setAdviceCount(logDTO.getAdviceCount() + 1);
 //        LogHolder.setLogDto(logDTO);

@@ -1,8 +1,10 @@
 package com.sz.springcloudsamples.common.webmvc.interceptor;
 
 import com.sz.springcloudsamples.common.annotation.IgnoreTracing;
+import com.sz.springcloudsamples.common.mvc.constant.ConstantForHttpHeader;
 import com.sz.springcloudsamples.common.mvc.dto.LogDTO;
 import com.sz.springcloudsamples.common.thread.threadlocal.LogHolder;
+import com.sz.springcloudsamples.common.util.FeignUtils;
 import com.sz.springcloudsamples.common.util.RequestUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
@@ -71,6 +73,12 @@ public class LogInterceptor implements HandlerInterceptor {
             logDTO.setIsIgnoreTracing(true);
             LogHolder.setLogDto(logDTO);
             return true;
+        }
+
+        if (FeignUtils.getInstance().isFeignRequest(request)) {
+            logDTO.setLogCode(request.getHeader(ConstantForHttpHeader.LOG_CODE))
+                    .setLogStep(Integer.parseInt(request.getHeader(ConstantForHttpHeader.LOG_STEP)))
+                    .setIsIgnoreTracing(Boolean.valueOf(request.getHeader(ConstantForHttpHeader.LOG_IGNORE_TRACING)));
         }
 
         LogHolder.setLogDto(logDTO);

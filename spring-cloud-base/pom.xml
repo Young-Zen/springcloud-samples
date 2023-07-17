@@ -17,6 +17,8 @@
 	<modules>
 		<module>spring-cloud-common</module>
 		<module>spring-cloud-demo</module>
+		<module>order-server</module>
+		<module>storage-server</module>
 	</modules>
 
 	<dependencies>
