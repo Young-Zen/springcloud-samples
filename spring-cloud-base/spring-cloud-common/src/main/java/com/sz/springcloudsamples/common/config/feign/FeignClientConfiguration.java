@@ -4,6 +4,7 @@ import com.sz.springcloudsamples.common.mvc.constant.ConstantForHttpHeader;
 import com.sz.springcloudsamples.common.thread.threadlocal.LogHolder;
 import feign.FeignException;
 import feign.Response;
+import feign.Retryer;
 import feign.codec.Decoder;
 import feign.codec.ErrorDecoder;
 import feign.optionals.OptionalDecoder;
@@ -21,12 +22,14 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Map;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 /**
  * @author Yanghj
  * @date 2023/7/18 14:53
  */
 @Configuration
-public class FeignDecoderConfiguration {
+public class FeignClientConfiguration {
 
     @Autowired
     private ObjectFactory<HttpMessageConverters> messageConverters;
@@ -40,6 +43,11 @@ public class FeignDecoderConfiguration {
     @Bean
     public ErrorDecoder feignErrorDecoder() {
         return new FeignErrorDecoder();
+    }
+
+    @Bean
+    public Retryer feignRetryer() {
+        return new Retryer.Default(100, SECONDS.toMillis(1), 3);
     }
 
     public class FeignDecoder extends SpringDecoder {

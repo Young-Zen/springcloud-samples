@@ -11,6 +11,7 @@ import com.sz.springcloudsamples.order.vo.OrderVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -34,6 +35,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderDao, OrderEntity> imp
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void create(OrderVO order) {
         log.info("------->交易开始");
         //本地方法
