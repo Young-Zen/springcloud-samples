@@ -32,6 +32,6 @@ public class StockController extends BaseController {
     @PostMapping("decrease")
     public ResponseResultDTO decrease(@RequestParam("productId") Long productId, @RequestParam("count") Integer count) {
         stockService.decrease(productId, count);
-        return ResponseResultDTO.ok("Decrease stock success");
+        return super.ok("Decrease stock success");
     }
 }

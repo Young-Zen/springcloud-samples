@@ -37,7 +37,7 @@ public class OrderController extends BaseController {
     @PostMapping("create")
     public ResponseResultDTO create(@Validated(OrderVO.Add.class) @RequestBody OrderVO order) {
         orderService.create(order);
-        return ResponseResultDTO.ok("Create order success");
+        return super.ok("Create order success");
     }
 
     /**
@@ -52,6 +52,6 @@ public class OrderController extends BaseController {
     ResponseResultDTO update(@RequestParam("id") Long id, @RequestParam("money") BigDecimal money,
                   @RequestParam("status") Integer status) {
         orderService.update(id, money, status);
-        return ResponseResultDTO.ok("订单状态修改成功");
+        return super.ok("订单状态修改成功");
     }
 }

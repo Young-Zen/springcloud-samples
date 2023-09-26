@@ -58,7 +58,7 @@ public class PersonController extends BaseController {
     @ApiOperation("MybatisPlus list 方法例子")
     public ResponseResultDTO list() {
         List<PersonEntity> personEntityList = personService.list();
-        return ResponseResultDTO.ok(PersonMapper.INSTANCE.toVOList(personEntityList));
+        return super.ok(PersonMapper.INSTANCE.toVOList(personEntityList));
     }
 
     @GetMapping("/mybatisPlus/page")
@@ -67,7 +67,7 @@ public class PersonController extends BaseController {
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.orderByDesc("pk_person_id");
         IPage<PersonEntity> page = personService.page(new Page<>(0, 10), wrapper);
-        return ResponseResultDTO.ok(PersonMapper.INSTANCE.toVOPage(page));
+        return super.ok(PersonMapper.INSTANCE.toVOPage(page));
     }
 
     @PostMapping("/add")
@@ -79,23 +79,23 @@ public class PersonController extends BaseController {
         wrapper.last("limit 1");
         wrapper.orderByDesc("pk_person_id");
         PersonEntity personEntity = personService.getOne(wrapper);
-        return ResponseResultDTO.ok(PersonMapper.INSTANCE.toVO(personEntity));
+        return super.ok(PersonMapper.INSTANCE.toVO(personEntity));
     }
 
     @PostMapping("/delete")
     @ApiOperation("删除")
     public ResponseResultDTO delete(@ApiParam(value = "正整数", required = true) @NotNull(message = "ID不能为空") @Min(value = 1, message = "ID最小为1") @RequestParam("id") Long id) {
         personService.removeById(id);
-        return ResponseResultDTO.ok();
+        return super.ok();
     }
 
     @GetMapping("/lombok/chain")
     @ApiOperation("Lombok 链式 set 方法例子")
-    public PersonVO chain() {
+    public ResponseResultDTO chain() {
         PersonVO personVO = new PersonVO();
         personVO.setName("lombok").setAge(2).setBirthday(LocalDate.of(2020, 1, 1)).setAccount(new BigDecimal("5.2")).setDeleted(false);
         PersonEntity personEntity = PersonMapper.INSTANCE.toEntity(personVO);
-        return PersonMapper.INSTANCE.toVO(personEntity);
+        return super.ok(PersonMapper.INSTANCE.toVO(personEntity));
     }
 
     @GetMapping("/exception")
@@ -112,7 +112,7 @@ public class PersonController extends BaseController {
         wrapper.eq("name", "mybatisPlus");
         wrapper.last("limit 1");
         PersonEntity personEntity = personService.getOne(wrapper);
-        return ResponseResultDTO.ok("look console", personEntity);
+        return super.ok("look console", PersonMapper.INSTANCE.toVO(personEntity));
     }
 
     @GetMapping("/async")
@@ -120,7 +120,7 @@ public class PersonController extends BaseController {
     public ResponseResultDTO async() {
         personService.async();
         this.response.setHeader("async", this.request.getRequestURI());
-        return ResponseResultDTO.ok("look console");
+        return super.ok("look console");
     }
 
     @GetMapping("/security")
@@ -129,6 +129,6 @@ public class PersonController extends BaseController {
     public ResponseResultDTO security() {
         ResponseResultDTO responseResultDTO = null;
         responseResultDTO.getCode();
-        return ResponseResultDTO.fail();
+        return super.fail();
     }
 }
