@@ -20,11 +20,13 @@ public class BaseController {
     // 在Spring中，Controller的scope是singleton(单例)，但是其中注入的request却是线程安全的，原因在于：
     // 使用这种方式，当Bean初始化时，Spring并没有注入一个request对象，而是注入了一个代理（proxy）；
     // 当Bean中需要使用request对象时，通过该代理获取request对象。代理的实现参见AutowireUtils的内部类。
+    @SuppressWarnings("PMD")
     @Autowired
     protected HttpServletRequest request;
     @Autowired
     protected HttpServletResponse response;
 
+    @SuppressWarnings("PMD")
     // 线程不安全
     // @ModelAttribute注解用在Controller中修饰方法时，其作用是Controller中的每个@RequestMapping方法执行前，该方法都会执行。
     // 因此，setReqAndRes()的作用是在每个HandlerMethod执行前为request对象赋值。

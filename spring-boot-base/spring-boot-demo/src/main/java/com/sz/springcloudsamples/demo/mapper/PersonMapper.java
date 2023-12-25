@@ -17,12 +17,22 @@ public interface PersonMapper extends BaseMapper<PersonVO, PersonEntity> {
 
     PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class);
 
+    /**
+     * to VO
+     * @param entity
+     * @return
+     */
     @Override
     @Mappings({
             @Mapping(source = "pkPersonId", target = "personId")
     })
     PersonVO toVO(PersonEntity entity);
 
+    /**
+     * to Entity
+     * @param vo
+     * @return
+     */
     @Override
     @Mappings({
             @Mapping(source = "personId", target = "pkPersonId")

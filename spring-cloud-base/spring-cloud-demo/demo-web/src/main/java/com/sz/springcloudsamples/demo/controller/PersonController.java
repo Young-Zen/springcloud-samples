@@ -67,7 +67,7 @@ public class PersonController extends BaseController {
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.orderByDesc("pk_person_id");
         IPage<PersonEntity> page = personService.page(new Page<>(0, 10), wrapper);
-        return super.ok(PersonMapper.INSTANCE.toVOPage(page));
+        return super.ok(PersonMapper.INSTANCE.toVoPage(page));
     }
 
     @PostMapping("/add")

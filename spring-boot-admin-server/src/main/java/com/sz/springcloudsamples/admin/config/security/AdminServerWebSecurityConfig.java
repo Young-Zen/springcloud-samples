@@ -30,18 +30,25 @@ public class AdminServerWebSecurityConfig extends WebSecurityConfigurerAdapter {
         successHandler.setDefaultTargetUrl(adminContextPath + "/");
 
         http.authorizeRequests()
-                .antMatchers(adminContextPath + "/assets/**").permitAll()   //Grants public access to all static assets and the login page.
+                //Grants public access to all static assets and the login page.
+                .antMatchers(adminContextPath + "/assets/**").permitAll()
                 .antMatchers(adminContextPath + "/login").permitAll()
-                .anyRequest().authenticated()   //Every other request must be authenticated.
+                //Every other request must be authenticated.
+                .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage(adminContextPath + "/login").successHandler(successHandler).and()
-                .logout().logoutUrl(adminContextPath + "/logout").and() //Configures login and logout.
-                .httpBasic().and()  //Enables HTTP-Basic support. This is needed for the Spring Boot Admin Client to register.
+                //Configures login and logout.
+                .logout().logoutUrl(adminContextPath + "/logout").and()
+                //Enables HTTP-Basic support. This is needed for the Spring Boot Admin Client to register.
+                .httpBasic().and()
                 .csrf()
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) //Enables CSRF-Protection using Cookies
+                //Enables CSRF-Protection using Cookies
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .ignoringAntMatchers(
-                        adminContextPath + "/instances",    //Disables CRSF-Protection the endpoint the Spring Boot Admin Client uses to register.
-                        adminContextPath + "/actuator/**"   //Disables CRSF-Protection for the actuator endpoints.
+                        //Disables CRSF-Protection the endpoint the Spring Boot Admin Client uses to register.
+                        adminContextPath + "/instances",
+                        //Disables CRSF-Protection for the actuator endpoints.
+                        adminContextPath + "/actuator/**"
                 );
         // @formatter:on
     }

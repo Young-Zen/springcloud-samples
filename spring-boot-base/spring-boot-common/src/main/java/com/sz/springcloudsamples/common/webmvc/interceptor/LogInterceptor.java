@@ -1,5 +1,6 @@
 package com.sz.springcloudsamples.common.webmvc.interceptor;
 
+import cn.hutool.extra.servlet.ServletUtil;
 import com.sz.springcloudsamples.common.annotation.IgnoreTracing;
 import com.sz.springcloudsamples.common.mvc.constant.ConstantForHttpHeader;
 import com.sz.springcloudsamples.common.mvc.dto.LogDTO;
@@ -82,7 +83,7 @@ public class LogInterceptor implements HandlerInterceptor {
         }
 
         LogHolder.setLogDto(logDTO);
-        log.info("{}，服务器IP：{}，请求IP：{}，请求方式：{}，URL：{}", logCode, InetAddress.getLocalHost().getHostAddress(), RequestUtils.getInstance().getRemoteIp(request), request.getMethod(), request.getRequestURL());
+        log.info("{}，服务器IP：{}，请求IP：{}，请求方式：{}，URL：{}", logCode, InetAddress.getLocalHost().getHostAddress(), ServletUtil.getClientIP(request), request.getMethod(), request.getRequestURL());
         return true;
     }
 

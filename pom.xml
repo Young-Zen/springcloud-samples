@@ -29,7 +29,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.source.version>3.2.1</maven.source.version>
-        <maven.pmd.version>3.8</maven.pmd.version>
+        <maven.pmd.version>3.11.0</maven.pmd.version>
         <docker.maven.version>1.2.1</docker.maven.version>
         <dockerfile-maven-version>1.4.13</dockerfile-maven-version>
         <!-- Dependency version properties -->
@@ -43,7 +43,7 @@
         <swagger-models.version>1.5.24</swagger-models.version>
         <google.guava.version>32.0.1-jre</google.guava.version>
         <alibaba.transmittable-thread-local.version>2.14.2</alibaba.transmittable-thread-local.version>
-        <alibaba.p3c-pmd.version>1.3.6</alibaba.p3c-pmd.version>
+        <alibaba.p3c-pmd.version>2.1.1</alibaba.p3c-pmd.version>
     </properties>
 
     <modules>
@@ -162,7 +162,6 @@
                 <version>${maven.pmd.version}</version>
                 <configuration>
                     <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-                    <minimumPriority>2</minimumPriority>
                     <printFailingErrors>true</printFailingErrors>
                     <rulesets>
                         <ruleset>rulesets/java/ali-comment.xml</ruleset>
@@ -176,7 +175,9 @@
                         <ruleset>rulesets/java/ali-other.xml</ruleset>
                         <ruleset>rulesets/java/ali-set.xml</ruleset>
                     </rulesets>
-                    <printFailingErrors>true</printFailingErrors>
+                    <excludes>
+                        <exclude>**/mapper/*Impl.java</exclude>
+                    </excludes>
                 </configuration>
                 <executions>
                     <!-- 绑定pmd:check到verify生命周期 -->

@@ -15,15 +15,40 @@ import java.util.List;
  */
 public interface BaseMapper<T extends BaseVO, S extends BaseEntity> {
 
+    /**
+     * to VO
+     * @param entity
+     * @return
+     */
     T toVO(S entity);
 
+    /**
+     * to Entity
+     * @param vo
+     * @return
+     */
     S toEntity(T vo);
 
+    /**
+     * to VOList
+     * @param entityList
+     * @return
+     */
     List<T> toVOList(List<S> entityList);
 
+    /**
+     * to EntityList
+     * @param voList
+     * @return
+     */
     List<S> toEntityList(List<T> voList);
 
-    default IPage<T> toVOPage(IPage<S> entityPage) {
+    /**
+     * to VOPage
+     * @param entityPage
+     * @return
+     */
+    default IPage<T> toVoPage(IPage<S> entityPage) {
         if (entityPage == null) {
             return null;
         }
