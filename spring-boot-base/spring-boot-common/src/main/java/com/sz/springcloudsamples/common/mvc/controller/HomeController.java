@@ -1,11 +1,13 @@
 package com.sz.springcloudsamples.common.mvc.controller;
 
-import com.sz.springcloudsamples.common.annotation.IgnoreTracing;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.sz.springcloudsamples.common.annotation.IgnoreTracing;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * 设置主页为/swagger-ui.html

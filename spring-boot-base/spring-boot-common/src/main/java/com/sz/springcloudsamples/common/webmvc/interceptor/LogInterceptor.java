@@ -1,25 +1,26 @@
 package com.sz.springcloudsamples.common.webmvc.interceptor;
 
-import cn.hutool.extra.servlet.ServletUtil;
-import com.sz.springcloudsamples.common.annotation.IgnoreTracing;
-import com.sz.springcloudsamples.common.mvc.constant.ConstantForHttpHeader;
-import com.sz.springcloudsamples.common.mvc.dto.LogDTO;
-import com.sz.springcloudsamples.common.thread.threadlocal.LogHolder;
-import com.sz.springcloudsamples.common.util.FeignUtils;
-import com.sz.springcloudsamples.common.util.RequestUtils;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.StringUtils;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.util.StringUtils;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.sz.springcloudsamples.common.annotation.IgnoreTracing;
+import com.sz.springcloudsamples.common.mvc.constant.ConstantForHttpHeader;
+import com.sz.springcloudsamples.common.mvc.dto.LogDTO;
+import com.sz.springcloudsamples.common.thread.threadlocal.LogHolder;
+import com.sz.springcloudsamples.common.util.FeignUtils;
+
+import cn.hutool.extra.servlet.ServletUtil;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 日志拦截器
@@ -37,7 +38,10 @@ public class LogInterceptor implements HandlerInterceptor {
     private String applicationContextPath = "/";
 
     public LogInterceptor(String additionalSkipPattern) {
-        String skipPattern = StringUtils.hasText(additionalSkipPattern) ? DEFAULT_SKIP_PATTERN + "|" + additionalSkipPattern : DEFAULT_SKIP_PATTERN;
+        String skipPattern =
+                StringUtils.hasText(additionalSkipPattern)
+                        ? DEFAULT_SKIP_PATTERN + "|" + additionalSkipPattern
+                        : DEFAULT_SKIP_PATTERN;
         pattern = Pattern.compile(skipPattern);
     }
 
@@ -47,7 +51,9 @@ public class LogInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(
+            HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws Exception {
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }
@@ -62,14 +68,19 @@ public class LogInterceptor implements HandlerInterceptor {
         Method method = ((HandlerMethod) handler).getMethod();
         IgnoreTracing ignoreTracing = method.getAnnotation(IgnoreTracing.class);
         if (ignoreTracing == null) {
-            //ignoreTracing = ((HandlerMethod) handler).getBeanType().getAnnotation(IgnoreTracing.class);
+            // ignoreTracing = ((HandlerMethod)
+            // handler).getBeanType().getAnnotation(IgnoreTracing.class);
             ignoreTracing = method.getDeclaringClass().getAnnotation(IgnoreTracing.class);
         }
         if (ignoreTracing != null) {
             logDTO.setIsIgnoreTracing(true);
         }
 
-        Matcher matcher = pattern.matcher(this.trimHead(request.getRequestURI(), "/".equals(applicationContextPath) ? "" : applicationContextPath));
+        Matcher matcher =
+                pattern.matcher(
+                        this.trimHead(
+                                request.getRequestURI(),
+                                "/".equals(applicationContextPath) ? "" : applicationContextPath));
         if (matcher.matches()) {
             logDTO.setIsIgnoreTracing(true);
             LogHolder.setLogDto(logDTO);
@@ -79,21 +90,34 @@ public class LogInterceptor implements HandlerInterceptor {
         if (FeignUtils.getInstance().isFeignRequest(request)) {
             logDTO.setLogCode(request.getHeader(ConstantForHttpHeader.LOG_CODE))
                     .setLogStep(Integer.parseInt(request.getHeader(ConstantForHttpHeader.LOG_STEP)))
-                    .setIsIgnoreTracing(Boolean.valueOf(request.getHeader(ConstantForHttpHeader.LOG_IGNORE_TRACING)));
+                    .setIsIgnoreTracing(
+                            Boolean.valueOf(
+                                    request.getHeader(ConstantForHttpHeader.LOG_IGNORE_TRACING)));
         }
 
         LogHolder.setLogDto(logDTO);
-        log.info("{}，服务器IP：{}，请求IP：{}，请求方式：{}，URL：{}", logCode, InetAddress.getLocalHost().getHostAddress(), ServletUtil.getClientIP(request), request.getMethod(), request.getRequestURL());
+        log.info(
+                "{}，服务器IP：{}，请求IP：{}，请求方式：{}，URL：{}",
+                logCode,
+                InetAddress.getLocalHost().getHostAddress(),
+                ServletUtil.getClientIP(request),
+                request.getMethod(),
+                request.getRequestURL());
         return true;
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-
-    }
+    public void postHandle(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Object handler,
+            ModelAndView modelAndView)
+            throws Exception {}
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void afterCompletion(
+            HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+            throws Exception {
         LogHolder.clean();
     }
 

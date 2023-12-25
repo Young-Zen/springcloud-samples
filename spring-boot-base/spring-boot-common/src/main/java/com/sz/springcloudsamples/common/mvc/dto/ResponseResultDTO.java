@@ -1,6 +1,7 @@
 package com.sz.springcloudsamples.common.mvc.dto;
 
 import com.sz.springcloudsamples.common.mvc.enums.ResponseCodeEnum;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -18,8 +19,10 @@ import lombok.experimental.Accessors;
 public class ResponseResultDTO<T> {
     @ApiModelProperty("响应码")
     private String code;
+
     @ApiModelProperty("响应消息")
     private String msg;
+
     @ApiModelProperty("响应数据")
     private T data;
 

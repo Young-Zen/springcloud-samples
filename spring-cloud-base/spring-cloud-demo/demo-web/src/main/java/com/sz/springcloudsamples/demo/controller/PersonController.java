@@ -1,8 +1,21 @@
 package com.sz.springcloudsamples.demo.controller;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import com.sz.springcloudsamples.common.annotation.IgnoreTracing;
 import com.sz.springcloudsamples.common.exception.BaseException;
 import com.sz.springcloudsamples.common.mvc.controller.BaseController;
@@ -11,20 +24,10 @@ import com.sz.springcloudsamples.demo.entity.PersonEntity;
 import com.sz.springcloudsamples.demo.service.PersonService;
 import com.sz.springcloudsamples.demo.service.mapper.PersonMapper;
 import com.sz.springcloudsamples.demo.vo.PersonVO;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 /**
  * @author Yanghj
@@ -35,15 +38,18 @@ import java.util.List;
 @Api(tags = "Person 控制器")
 public class PersonController extends BaseController {
 
-    @Autowired
-    PersonService personService;
+    @Autowired PersonService personService;
 
     @GetMapping("/mybatisPlus")
     @ApiOperation("MybatisPlus 例子")
     public ResponseResultDTO mybatisPlus() {
         PersonVO personVO = new PersonVO();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        personVO.setName("mybatisPlus").setAge(1).setBirthday(LocalDate.parse("2020-01-01", dateTimeFormatter)).setAccount(new BigDecimal("5.2")).setDeleted(false);
+        personVO.setName("mybatisPlus")
+                .setAge(1)
+                .setBirthday(LocalDate.parse("2020-01-01", dateTimeFormatter))
+                .setAccount(new BigDecimal("5.2"))
+                .setDeleted(false);
         personService.save(PersonMapper.INSTANCE.toEntity(personVO));
 
         QueryWrapper wrapper = new QueryWrapper();
@@ -72,7 +78,11 @@ public class PersonController extends BaseController {
 
     @PostMapping("/add")
     @ApiOperation("插入")
-    public ResponseResultDTO add(@ApiParam(name = "PersonVO对象", value = "json格式", required = true) @Validated(PersonVO.Add.class) @RequestBody PersonVO personVO) {
+    public ResponseResultDTO add(
+            @ApiParam(name = "PersonVO对象", value = "json格式", required = true)
+                    @Validated(PersonVO.Add.class)
+                    @RequestBody
+                    PersonVO personVO) {
         personService.save(PersonMapper.INSTANCE.toEntity(personVO));
 
         QueryWrapper wrapper = new QueryWrapper();
@@ -84,7 +94,12 @@ public class PersonController extends BaseController {
 
     @PostMapping("/delete")
     @ApiOperation("删除")
-    public ResponseResultDTO delete(@ApiParam(value = "正整数", required = true) @NotNull(message = "ID不能为空") @Min(value = 1, message = "ID最小为1") @RequestParam("id") Long id) {
+    public ResponseResultDTO delete(
+            @ApiParam(value = "正整数", required = true)
+                    @NotNull(message = "ID不能为空")
+                    @Min(value = 1, message = "ID最小为1")
+                    @RequestParam("id")
+                    Long id) {
         personService.removeById(id);
         return super.ok();
     }
@@ -93,7 +108,11 @@ public class PersonController extends BaseController {
     @ApiOperation("Lombok 链式 set 方法例子")
     public ResponseResultDTO chain() {
         PersonVO personVO = new PersonVO();
-        personVO.setName("lombok").setAge(2).setBirthday(LocalDate.of(2020, 1, 1)).setAccount(new BigDecimal("5.2")).setDeleted(false);
+        personVO.setName("lombok")
+                .setAge(2)
+                .setBirthday(LocalDate.of(2020, 1, 1))
+                .setAccount(new BigDecimal("5.2"))
+                .setDeleted(false);
         PersonEntity personEntity = PersonMapper.INSTANCE.toEntity(personVO);
         return super.ok(PersonMapper.INSTANCE.toVO(personEntity));
     }

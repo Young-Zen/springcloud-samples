@@ -1,13 +1,14 @@
 package com.sz.springcloudsamples.common.util;
 
-import com.sz.springcloudsamples.common.mvc.constant.ConstantForHttpHeader;
+import java.util.Objects;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Objects;
+import com.sz.springcloudsamples.common.mvc.constant.ConstantForHttpHeader;
 
 /**
  * @author Yanghj
@@ -27,8 +28,7 @@ public class FeignUtils {
         private static final FeignUtils INSTANCE = new FeignUtils();
     }
 
-    private FeignUtils() {
-    }
+    private FeignUtils() {}
 
     public static final FeignUtils getInstance() {
         return FeignUtils.FeignUtilsHolder.INSTANCE;

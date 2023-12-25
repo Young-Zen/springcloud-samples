@@ -1,11 +1,12 @@
 package com.sz.springcloudsamples.common.mvc.mapper;
 
+import java.util.List;
+
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import com.sz.springcloudsamples.common.mvc.entity.BaseEntity;
 import com.sz.springcloudsamples.common.mvc.vo.BaseVO;
-
-import java.util.List;
 
 /**
  * 基本实体映射处理接口
@@ -17,6 +18,7 @@ public interface BaseMapper<T extends BaseVO, S extends BaseEntity> {
 
     /**
      * to VO
+     *
      * @param entity
      * @return
      */
@@ -24,6 +26,7 @@ public interface BaseMapper<T extends BaseVO, S extends BaseEntity> {
 
     /**
      * to Entity
+     *
      * @param vo
      * @return
      */
@@ -31,6 +34,7 @@ public interface BaseMapper<T extends BaseVO, S extends BaseEntity> {
 
     /**
      * to VOList
+     *
      * @param entityList
      * @return
      */
@@ -38,6 +42,7 @@ public interface BaseMapper<T extends BaseVO, S extends BaseEntity> {
 
     /**
      * to EntityList
+     *
      * @param voList
      * @return
      */
@@ -45,6 +50,7 @@ public interface BaseMapper<T extends BaseVO, S extends BaseEntity> {
 
     /**
      * to VOPage
+     *
      * @param entityPage
      * @return
      */
@@ -52,7 +58,8 @@ public interface BaseMapper<T extends BaseVO, S extends BaseEntity> {
         if (entityPage == null) {
             return null;
         }
-        IPage<T> voPage = new Page<T>(entityPage.getCurrent(), entityPage.getSize(), entityPage.getTotal());
+        IPage<T> voPage =
+                new Page<T>(entityPage.getCurrent(), entityPage.getSize(), entityPage.getTotal());
         voPage.setRecords(this.toVOList(entityPage.getRecords()));
         return voPage;
     }

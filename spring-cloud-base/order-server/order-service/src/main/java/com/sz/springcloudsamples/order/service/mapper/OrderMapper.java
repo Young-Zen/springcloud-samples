@@ -1,10 +1,11 @@
 package com.sz.springcloudsamples.order.service.mapper;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+
 import com.sz.springcloudsamples.common.mvc.mapper.BaseMapper;
 import com.sz.springcloudsamples.order.entity.OrderEntity;
 import com.sz.springcloudsamples.order.vo.OrderVO;
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 /**
  * @author Yanghj

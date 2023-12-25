@@ -1,13 +1,10 @@
 package com.sz.springcloudsamples.common.config.feign;
 
-import com.sz.springcloudsamples.common.mvc.constant.ConstantForHttpHeader;
-import com.sz.springcloudsamples.common.thread.threadlocal.LogHolder;
-import feign.FeignException;
-import feign.Response;
-import feign.Retryer;
-import feign.codec.Decoder;
-import feign.codec.ErrorDecoder;
-import feign.optionals.OptionalDecoder;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.Collection;
+import java.util.Map;
+
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
@@ -17,10 +14,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.CollectionUtils;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.Collection;
-import java.util.Map;
+import com.sz.springcloudsamples.common.mvc.constant.ConstantForHttpHeader;
+import com.sz.springcloudsamples.common.thread.threadlocal.LogHolder;
+
+import feign.FeignException;
+import feign.Response;
+import feign.Retryer;
+import feign.codec.Decoder;
+import feign.codec.ErrorDecoder;
+import feign.optionals.OptionalDecoder;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
@@ -31,8 +33,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 @Configuration
 public class FeignClientConfiguration {
 
-    @Autowired
-    private ObjectFactory<HttpMessageConverters> messageConverters;
+    @Autowired private ObjectFactory<HttpMessageConverters> messageConverters;
 
     @Bean
     public Decoder feignDecoder() {

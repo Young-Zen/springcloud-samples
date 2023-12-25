@@ -1,13 +1,14 @@
 package com.sz.springcloudsamples.common.mvc.controller;
 
-import com.sz.springcloudsamples.common.mvc.dto.ResponseResultDTO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Validated  //校验方法参数
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+
+import com.sz.springcloudsamples.common.mvc.dto.ResponseResultDTO;
+
+@Validated // 校验方法参数
 /**
  * 基本控制器类
  *
@@ -23,8 +24,8 @@ public class BaseController {
     @SuppressWarnings("PMD")
     @Autowired
     protected HttpServletRequest request;
-    @Autowired
-    protected HttpServletResponse response;
+
+    @Autowired protected HttpServletResponse response;
 
     @SuppressWarnings("PMD")
     // 线程不安全

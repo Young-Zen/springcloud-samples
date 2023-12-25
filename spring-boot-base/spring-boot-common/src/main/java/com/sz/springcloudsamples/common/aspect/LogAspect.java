@@ -1,10 +1,5 @@
 package com.sz.springcloudsamples.common.aspect;
 
-import com.sz.springcloudsamples.common.config.property.LogProperties;
-import com.sz.springcloudsamples.common.mvc.dto.LogDTO;
-import com.sz.springcloudsamples.common.thread.threadlocal.LogHolder;
-import com.sz.springcloudsamples.common.util.AspectUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -14,6 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import com.sz.springcloudsamples.common.config.property.LogProperties;
+import com.sz.springcloudsamples.common.mvc.dto.LogDTO;
+import com.sz.springcloudsamples.common.thread.threadlocal.LogHolder;
+import com.sz.springcloudsamples.common.util.AspectUtils;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 日志切面类
@@ -28,26 +30,30 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class LogAspect {
 
-    @Autowired
-    private LogProperties logProperties;
+    @Autowired private LogProperties logProperties;
 
     /**
      * 方法前置通知，打印方法入参
      *
      * @param joinPoint
      */
-    @Before(value = "com.sz.springcloudsamples.common.aspect.Pointcuts.controllerAspect()" +
-            "||com.sz.springcloudsamples.common.aspect.Pointcuts.serviceAspect()" +
-            "||com.sz.springcloudsamples.common.aspect.Pointcuts.daoAspect()")
+    @Before(
+            value =
+                    "com.sz.springcloudsamples.common.aspect.Pointcuts.controllerAspect()"
+                            + "||com.sz.springcloudsamples.common.aspect.Pointcuts.serviceAspect()"
+                            + "||com.sz.springcloudsamples.common.aspect.Pointcuts.daoAspect()")
     public void methodBefore(JoinPoint joinPoint) {
         LogDTO logDTO = LogHolder.getLogDto();
-        logDTO.setLogStep(logDTO.getLogStep() + 1)
-                .setAdviceCount(logDTO.getAdviceCount() + 1);
-//        LogHolder.setLogDto(logDTO);
+        logDTO.setLogStep(logDTO.getLogStep() + 1).setAdviceCount(logDTO.getAdviceCount() + 1);
+        //        LogHolder.setLogDto(logDTO);
         if (logDTO.getIsIgnoreTracing() || !logProperties.getParam()) {
             return;
         }
-        log.info("第{}步，方法名：{}，参数：{}", logDTO.getLogStep(), joinPoint.getSignature(), AspectUtils.getInstance().getMethodParams(joinPoint));
+        log.info(
+                "第{}步，方法名：{}，参数：{}",
+                logDTO.getLogStep(),
+                joinPoint.getSignature(),
+                AspectUtils.getInstance().getMethodParams(joinPoint));
     }
 
     /**
@@ -56,24 +62,28 @@ public class LogAspect {
      * @param joinPoint
      * @param result
      */
-    @AfterReturning(value = "com.sz.springcloudsamples.common.aspect.Pointcuts.controllerAspect()" +
-            "||com.sz.springcloudsamples.common.aspect.Pointcuts.serviceAspect()" +
-            "||com.sz.springcloudsamples.common.aspect.Pointcuts.daoAspect()", returning = "result")
+    @AfterReturning(
+            value =
+                    "com.sz.springcloudsamples.common.aspect.Pointcuts.controllerAspect()"
+                            + "||com.sz.springcloudsamples.common.aspect.Pointcuts.serviceAspect()"
+                            + "||com.sz.springcloudsamples.common.aspect.Pointcuts.daoAspect()",
+            returning = "result")
     public void methodAfterReturning(JoinPoint joinPoint, Object result) {
         LogDTO logDTO = LogHolder.getLogDto();
         logDTO.setAdviceCount(logDTO.getAdviceCount() + 1);
-//        LogHolder.setLogDto(logDTO);
+        //        LogHolder.setLogDto(logDTO);
         if (logDTO.getIsIgnoreTracing() || !logProperties.getResult()) {
             return;
         }
         log.info("结果：[{}] {}", joinPoint.getSignature(), result);
     }
 
-    @AfterThrowing(value = "com.sz.springcloudsamples.common.aspect.Pointcuts.controllerAspect()", throwing = "cause")
+    @AfterThrowing(
+            value = "com.sz.springcloudsamples.common.aspect.Pointcuts.controllerAspect()",
+            throwing = "cause")
     public void methodAfterThrowing(Throwable cause) {
         LogDTO logDTO = LogHolder.getLogDto();
-        logDTO.setAdviceCount(logDTO.getAdviceCount() + 1)
-                .setIsThrowing(true);
-//        LogHolder.setLogDto(logDTO);
+        logDTO.setAdviceCount(logDTO.getAdviceCount() + 1).setIsThrowing(true);
+        //        LogHolder.setLogDto(logDTO);
     }
 }

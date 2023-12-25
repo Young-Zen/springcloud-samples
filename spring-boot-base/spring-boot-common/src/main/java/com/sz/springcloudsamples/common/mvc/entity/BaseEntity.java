@@ -1,9 +1,10 @@
 package com.sz.springcloudsamples.common.mvc.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import lombok.Data;
-
 import java.time.LocalDateTime;
+
+import com.baomidou.mybatisplus.annotation.TableField;
+
+import lombok.Data;
 
 /**
  * 基本数据实体类

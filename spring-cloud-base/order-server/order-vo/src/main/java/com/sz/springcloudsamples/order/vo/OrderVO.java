@@ -1,12 +1,13 @@
 package com.sz.springcloudsamples.order.vo;
 
-import com.sz.springcloudsamples.common.mvc.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-
+import java.math.BigDecimal;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
-import java.math.BigDecimal;
+
+import com.sz.springcloudsamples.common.mvc.vo.BaseVO;
+
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * @author Yanghj
@@ -28,8 +29,6 @@ public class OrderVO extends BaseVO {
 
     private BigDecimal money;
 
-    /**
-     * 订单状态：0：创建中；1：已完结
-     */
+    /** 订单状态：0：创建中；1：已完结 */
     private Integer status;
 }

@@ -1,11 +1,12 @@
 package com.sz.springcloudsamples.common.mvc.vo;
 
+import java.time.LocalDateTime;
+import javax.validation.groups.Default;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
-import javax.validation.groups.Default;
-import java.time.LocalDateTime;
 
 /**
  * 基本视图对象
@@ -24,12 +25,8 @@ public class BaseVO {
     @ApiModelProperty(hidden = true)
     private LocalDateTime updateTime;
 
-    /**
-     * 继承Default类，可以在不指定 @Validated 的 group 时，使用所有默认校验方式。
-     */
-    public interface Add extends Default {
-    }
+    /** 继承Default类，可以在不指定 @Validated 的 group 时，使用所有默认校验方式。 */
+    public interface Add extends Default {}
 
-    public interface Update extends Default {
-    }
+    public interface Update extends Default {}
 }

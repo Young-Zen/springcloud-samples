@@ -23,16 +23,20 @@ public class DefaultWebSecurityConfigurerAdapter extends WebSecurityConfigurerAd
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf()
-                .ignoringAntMatchers("/actuator/**");
+        http.csrf().ignoringAntMatchers("/actuator/**");
         if (!csrfEnabled) {
             http.csrf().disable();
         }
         http.authorizeRequests()
-                .requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole("ACTUATOR_ADMIN")
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .antMatchers("/", "/error", "/swagger-ui.html", "/v2/api-docs", "/swagger-resources/**").permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers(EndpointRequest.toAnyEndpoint())
+                .hasRole("ACTUATOR_ADMIN")
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+                .permitAll()
+                .antMatchers(
+                        "/", "/error", "/swagger-ui.html", "/v2/api-docs", "/swagger-resources/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
                 .and()
                 .formLogin()
                 .and()

@@ -1,10 +1,7 @@
 package com.sz.springcloudsamples.common.config.aspect;
 
-import com.sz.springcloudsamples.common.aspect.LogAspect;
-import com.sz.springcloudsamples.common.exception.BaseException;
-import com.sz.springcloudsamples.common.mvc.dto.ResponseResultDTO;
-import com.sz.springcloudsamples.common.mvc.enums.ResponseCodeEnum;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Objects;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,7 +12,12 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
+import com.sz.springcloudsamples.common.aspect.LogAspect;
+import com.sz.springcloudsamples.common.exception.BaseException;
+import com.sz.springcloudsamples.common.mvc.dto.ResponseResultDTO;
+import com.sz.springcloudsamples.common.mvc.enums.ResponseCodeEnum;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Yanghj
@@ -27,8 +29,7 @@ import java.util.Objects;
 @Slf4j
 public class FeignAspect {
 
-    @Autowired
-    private LogAspect logAspect;
+    @Autowired private LogAspect logAspect;
 
     @Pointcut("@within(org.springframework.cloud.openfeign.FeignClient)")
     public void feignClientAspect() {}

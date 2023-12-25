@@ -1,11 +1,12 @@
 package com.sz.springcloudsamples.storage.vo;
 
-import com.sz.springcloudsamples.common.mvc.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
+
+import com.sz.springcloudsamples.common.mvc.vo.BaseVO;
+
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * @author Yanghj
@@ -19,23 +20,15 @@ public class StockVO extends BaseVO {
     @NotNull(groups = Update.class, message = "Id不能为空")
     private Long id;
 
-    /**
-     * 产品id
-     */
+    /** 产品id */
     private Long productId;
 
-    /**
-     * 总库存
-     */
+    /** 总库存 */
     private Integer total;
 
-    /**
-     * 已用库存
-     */
+    /** 已用库存 */
     private Integer used;
 
-    /**
-     * 剩余库存
-     */
+    /** 剩余库存 */
     private Integer residue;
 }

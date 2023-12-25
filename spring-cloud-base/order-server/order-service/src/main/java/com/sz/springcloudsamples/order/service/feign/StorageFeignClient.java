@@ -1,9 +1,10 @@
 package com.sz.springcloudsamples.order.service.feign;
 
-import com.sz.springcloudsamples.common.mvc.dto.ResponseResultDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.sz.springcloudsamples.common.mvc.dto.ResponseResultDTO;
 
 /**
  * @author Yanghj
@@ -20,5 +21,6 @@ public interface StorageFeignClient {
      * @return
      */
     @PostMapping(value = "api/storage/stock/decrease")
-    ResponseResultDTO decrease(@RequestParam("productId") Long productId, @RequestParam("count") Integer count);
+    ResponseResultDTO decrease(
+            @RequestParam("productId") Long productId, @RequestParam("count") Integer count);
 }
