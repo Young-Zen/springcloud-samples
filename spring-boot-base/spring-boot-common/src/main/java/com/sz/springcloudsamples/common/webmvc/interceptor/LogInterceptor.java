@@ -96,9 +96,10 @@ public class LogInterceptor implements HandlerInterceptor {
         }
 
         LogHolder.setLogDto(logDTO);
+        response.setHeader(ConstantForHttpHeader.LOG_CODE, logDTO.getLogCode());
         log.info(
                 "{}，服务器IP：{}，请求IP：{}，请求方式：{}，URL：{}",
-                logCode,
+                logDTO.getLogCode(),
                 InetAddress.getLocalHost().getHostAddress(),
                 ServletUtil.getClientIP(request),
                 request.getMethod(),
